@@ -4,6 +4,8 @@ SikritPad is a browser-based, client-side encrypted notepad designed with a focu
 This project demonstrates advanced web development concepts,
 including the Web Crypto API, asynchronous JavaScript, and a clean separation of concerns.
 
+![Demo](demo.gif)
+
 ## Key Features
 
 - Client-Side Encryption: All cryptographic operations occur within the browser context. Plaintext notes and passwords are never transmitted to a server.
