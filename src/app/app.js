@@ -1,10 +1,11 @@
 import { deriveId } from "../crypto/crypto.js";
 import { storage } from "../storage/storage.js";
-import { bindSubmitPassword, openEditor } from "../ui/ui.js";
+import { bindSubmitNote, bindSubmitPassword, openEditor } from "../ui/ui.js";
 import { state } from "./state.js";
 
 function initApp() {
     bindSubmitPassword(handlePasswordSubmit);
+    bindSubmitNote(handleNoteSubmit);
 }
 
 async function handlePasswordSubmit(password) {
@@ -33,6 +34,10 @@ async function handlePasswordSubmit(password) {
 
     state.unlocked = true;
     openEditor(state);
+}
+
+function handleNoteSubmit(note) {
+    console.log("ini mau disave: ", note);
 }
 
 export { initApp }
