@@ -1,6 +1,6 @@
 import { deriveId } from "../crypto/crypto.js";
 import { storage } from "../storage/storage.js";
-import { bindSubmitPassword, openEditor } from "../ui/password-ui.js";
+import { bindSubmitPassword, openEditor } from "../ui/ui.js";
 import { state } from "./state.js";
 
 function initApp() {
