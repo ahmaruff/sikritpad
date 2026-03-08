@@ -67,4 +67,24 @@ async function encrypt(note, encKey) {
     }
 }
 
-export { deriveId, encrypt }
+async function decrypt(blob, encKey) {
+    const dec = new TextDecoder();
+
+    const iv = new Uint8Array(blob.iv);
+    const cipherText = new Uint8Array(blob.data);
+
+
+    const plainText = await crypto.subtle.decrypt(
+        {
+            name: "AES-GCM",
+            iv: iv,
+        },
+        encKey,
+        cipherText
+    );
+
+
+    return dec.decode(plainText);
+}
+
+export { deriveId, encrypt, decrypt }
