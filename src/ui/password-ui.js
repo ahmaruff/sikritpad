@@ -19,4 +19,15 @@ function bindSubmitPassword(handler) {
     });
 }
 
-export { bindSubmitPassword }
+function openEditor(state) {
+    const passwordScreen = document.getElementById("password-screen");
+    const editorScreen = document.getElementById("editor-screen");
+    const textarea = document.getElementById("note-editor");
+
+    passwordScreen.style.display = "none";
+    editorScreen.style.display = "block";
+
+    textarea.value = state.note || "";
+}
+
+export { bindSubmitPassword, openEditor }

@@ -1,6 +1,6 @@
 import { deriveId } from "../crypto/crypto.js";
 import { storage } from "../storage/storage.js";
-import { bindSubmitPassword } from "../ui/password-ui.js";
+import { bindSubmitPassword, openEditor } from "../ui/password-ui.js";
 import { state } from "./state.js";
 
 function initApp() {
@@ -15,8 +15,24 @@ async function handlePasswordSubmit(password) {
 
     console.log("state: ", state);
 
-    const note = storage.get(noteId);
-    console.log(note);
+    const blob = storage.get(noteId);
+
+    if (!blob) {
+        // note belum ada
+        state.note = "";
+    } else {
+        /*
+        try {
+            state.note = await decrypt(blob, encKey);
+        } catch {
+            alert("Wrong password");
+            return;
+        }
+        */
+    }
+
+    state.unlocked = true;
+    openEditor(state);
 }
 
 export { initApp }
