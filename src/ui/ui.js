@@ -1,5 +1,11 @@
+const passwordScreen = document.getElementById("password-screen");
 const passwordInput = document.getElementById("password");
-const submitBtn = document.getElementById("submitPassword");
+const passwordSubmitBtn = document.getElementById("submitPassword");
+
+const editorScreen = document.getElementById("editor-screen");
+const editorTextarea = document.getElementById("note-editor");
+const editorSubmitBtn = document.getElementById("saveNote");
+
 
 function bindSubmitPassword(handler) {
     // Fungsi pembantu agar kodenya tidak duplikat
@@ -9,7 +15,7 @@ function bindSubmitPassword(handler) {
     };
 
     // Trigger saat tombol klik
-    submitBtn.addEventListener("click", triggerHandler);
+    passwordSubmitBtn.addEventListener("click", triggerHandler);
 
     // Trigger saat tekan Enter di input
     passwordInput.addEventListener("keydown", (e) => {
@@ -19,15 +25,20 @@ function bindSubmitPassword(handler) {
     });
 }
 
-function openEditor(state) {
-    const passwordScreen = document.getElementById("password-screen");
-    const editorScreen = document.getElementById("editor-screen");
-    const textarea = document.getElementById("note-editor");
+function bindSubmitNote(handler) {
+    const triggerHandler = () => {
+        const note = editorTextarea.value ?? "";
+        handler(note);
+    };
 
+    editorSubmitBtn.addEventListener("click", triggerHandler);
+}
+
+function openEditor(state) {
     passwordScreen.style.display = "none";
     editorScreen.style.display = "block";
 
-    textarea.value = state.note || "";
+    editorTextarea.value = state.note || "";
 }
 
-export { bindSubmitPassword, openEditor }
+export { bindSubmitPassword, bindSubmitNote, openEditor }
