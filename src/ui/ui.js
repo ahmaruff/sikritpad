@@ -34,6 +34,10 @@ function bindSubmitNote(handler) {
     editorSubmitBtn.addEventListener("click", triggerHandler);
 }
 
+function saving(isSaving) {
+    editorSubmitBtn.disabled = isSaving;
+}
+
 function openEditor(state) {
     passwordScreen.style.display = "none";
     editorScreen.style.display = "block";
@@ -41,4 +45,12 @@ function openEditor(state) {
     editorTextarea.value = state.note || "";
 }
 
-export { bindSubmitPassword, bindSubmitNote, openEditor }
+function closeEditor() {
+    passwordScreen.style.display = "block";
+    editorScreen.style.display = "none";
+
+    editorTextarea.value = "";
+    passwordInput.value = "";
+}
+
+export { bindSubmitPassword, bindSubmitNote, saving, openEditor, closeEditor }

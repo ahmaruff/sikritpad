@@ -45,4 +45,26 @@ async function deriveId(password) {
     return { noteId, encKey };
 }
 
-export { deriveId }
+async function encrypt(note, encKey) {
+    const enc = new TextEncoder();
+
+    const data = enc.encode(note);
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+
+    const cipherText = await crypto.subtle.encrypt(
+        {
+            name: "AES-GCM",
+            iv: iv
+        },
+        encKey,
+        data
+    );
+
+
+    return {
+        iv: Array.from(iv),
+        data: Array.from(new Uint8Array(cipherText))
+    }
+}
+
+export { deriveId, encrypt }

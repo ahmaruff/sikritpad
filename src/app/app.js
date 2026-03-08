@@ -1,6 +1,6 @@
-import { deriveId } from "../crypto/crypto.js";
+import { deriveId, encrypt } from "../crypto/crypto.js";
 import { storage } from "../storage/storage.js";
-import { bindSubmitNote, bindSubmitPassword, openEditor } from "../ui/ui.js";
+import { bindSubmitNote, bindSubmitPassword, saving, openEditor, closeEditor } from "../ui/ui.js";
 import { state } from "./state.js";
 
 function initApp() {
@@ -17,6 +17,7 @@ async function handlePasswordSubmit(password) {
     console.log("state: ", state);
 
     const blob = storage.get(noteId);
+    console.log("blob", blob);
 
     if (!blob) {
         // note belum ada
@@ -36,8 +37,29 @@ async function handlePasswordSubmit(password) {
     openEditor(state);
 }
 
-function handleNoteSubmit(note) {
-    console.log("ini mau disave: ", note);
+async function handleNoteSubmit(note) {
+    if (!state.unlocked) return;
+    state.note = note;
+
+    saving(true);
+    try {
+        const blob = await encrypt(state.note, state.encKey);
+        console.log(blob);
+        storage.set(state.noteId, blob);
+    } finally {
+        saving(false);
+    }
+
+    closeEditor();
+    purgeState(state);
+}
+
+function purgeState(state) {
+    state.password = null;
+    state.noteId = null;
+    state.encKey = null;
+    state.note = "";
+    state.unlocked = false;
 }
 
 export { initApp }
