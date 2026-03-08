@@ -1,0 +1,48 @@
+const APP_KEY = "somesuperhardtoguessstringthatyouwillneverknow_unlessyouareretarded";
+const ITERATION = 200000;
+
+async function deriveId(password) {
+    const enc = new TextEncoder();
+
+    const salt = enc.encode(APP_KEY);
+
+    const keyMaterial = await crypto.subtle.importKey(
+        "raw",
+        enc.encode(password),
+        "PBKDF2",
+        false,
+        ["deriveBits"]
+    );
+
+    const bits = await crypto.subtle.deriveBits(
+        {
+            name: "PBKDF2",
+            salt: salt,
+            iterations: ITERATION,
+            hash: "SHA-256"
+        },
+        keyMaterial,
+        384 // 48 bytes
+    );
+
+    const bytes = new Uint8Array(bits);
+
+    // split hasil
+    const noteIdBytes = bytes.slice(0, 16);
+    const keyBytes = bytes.slice(16);
+
+    // convert keyBytes jadi AES key
+    const encKey = await crypto.subtle.importKey(
+        "raw",
+        keyBytes,
+        { name: "AES-GCM" },
+        false,
+        ["encrypt", "decrypt"]
+    );
+
+    const noteId = btoa(String.fromCharCode(...noteIdBytes));
+
+    return { noteId, encKey };
+}
+
+export { deriveId }
