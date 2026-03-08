@@ -4,36 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SikritPAD</title>
+    <title>SikritPad | Secure Local Notes</title>
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/utils.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap"
+        rel="stylesheet">
 </head>
 
-<body>
-    <main class="px-8 flex flex-col items-center">
-        <h1 class="title-page">SikritPad</h1>
+<body class="bg-light">
+    <main class="px-8 py-16 container">
+
+        <!-- HEADER -->
+        <header class="text-center my-12">
+            <h1 class="title-page font-extrabold leading-100">SikritPad</h1>
+            <p class="font-light">Privacy-first notes. Encrypted in your browser.</p>
+        </header>
+
         <!-- PASSWORD SCREEN -->
-        <section id="password-screen">
-            <div>
-                <input type="password" placeholder="Enter password" id="password">
-                <button id="submitPassword">
-                    Open
-                </button>
+        <section id="password-screen" class="container" style="max-width: 450px;">
+            <div class="flex flex-col items-center">
+                <div class="p-8 flex flex-col items-center">
+
+                    <div class="alert-box mb-24 bg-zink-100 c-zink-700">
+                        <strong class="c-zink-950" style="display: block; margin-bottom: 4px;">
+                            Storage Disclaimer:
+                        </strong>
+                        This app uses <strong>Browser Local Storage</strong>.
+                        If you clear your browser data, site cookies, or use an Incognito window,
+                        <span class="c-warning">your notes will be permanently deleted</span> and cannot be recovered.
+                    </div>
+
+                    <p class="mb-6 text-center font-medium">Enter your master password to unlock or create a note.</p>
+
+                    <input id="password" type="password" placeholder="Master Password" class="mb-4 p-4"
+                        style="width: 100%; border: 1px solid var(--zink-500); background: transparent;">
+
+                    <button id="submitPassword" class="p-4 font-bold shadow bg-zink-800 c-zink-300"
+                        style="width: 100%; cursor: pointer; border: none;">
+                        Unlock Vault
+                    </button>
+
+                    <div class="mt-8 text-center">
+                        <p class="font-light c-zink-400" style="font-size: 0.8rem;">
+                            Your password is used to derive a unique key. <br>
+                            It is never stored or sent to any server.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- EDITOR SCREEN -->
-        <section id="editor-screen" style="display:none; width:100%; max-width:800px;">
+        <section id="editor-screen" style="display:none; width: 100%;">
+            <div class="px-8 flex flex-col">
+                <div class="flex justify-center mb-8">
+                    <button id="saveNote" class="p-4 font-bold shadow bg-zink-800 c-zink-300"
+                        style="cursor: pointer; border: none; min-width: 200px;">
+                        Securely Save & Lock
+                    </button>
+                </div>
 
-            <div class="flex flex-row justify-center mb-8">
-                <button id="saveNote">Save</button>
+                <div class="mb-4">
+                    <textarea id="note-editor" placeholder="Start writing your secret thoughts..."
+                        class="p-8 leading-160 font-normal bg-zink-50"
+                        style="width:100%; height:60vh; border: 1px solid var(--zink-200); resize: none;"></textarea>
+                </div>
+
+                <footer class="mt-4 text-center">
+                    <p class="font-light c-zink-400" style="font-size: 0.8rem;">
+                        Data is stored locally in your browser's database. <br>
+                        Note: Closing this tab or clicking save will purge sensitive data from memory.
+                    </p>
+                </footer>
             </div>
-
-            <textarea id="note-editor" placeholder="Start typing..." style="width:100%; height:70vh;"></textarea>
-
         </section>
-
     </main>
 
     <script type="module" src="/src/main.js"></script>

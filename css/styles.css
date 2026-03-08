@@ -1,3 +1,96 @@
-.title-page {
-    font-size: 6rem;
+:root {
+    font-size: 16px;
+
+    --zink-950: #09090b;
+    --zink-900: #18181b;
+    --zink-800: #27272a;
+    --zink-700: #3f3f46;
+    --zink-600: #52525c;
+    --zink-500: #71717b;
+    --zink-400: #9f9fa9;
+    --zink-300: #d4d4d8;
+    --zink-200: #e4e4e7;
+    --zink-100: #f4f4f5;
+    --zink-50: #fafafa;
+    
 }
+
+.c-zink-950 { color: var(--zink-950) }
+.c-zink-900 { color: var(--zink-900) }
+.c-zink-800 { color: var(--zink-800) }
+.c-zink-700 { color: var(--zink-700) }
+.c-zink-600 { color: var(--zink-600) }
+.c-zink-500 { color: var(--zink-500) }
+.c-zink-400 { color: var(--zink-400) }
+.c-zink-300 { color: var(--zink-300) }
+.c-zink-200 { color: var(--zink-200) }
+.c-zink-100 { color: var(--zink-100) }
+.c-zink-50 { color: var(--zink-50) }
+
+.bg-zink-950 { background-color: var(--zink-950) }
+.bg-zink-900 { background-color: var(--zink-900) }
+.bg-zink-800 { background-color: var(--zink-800) }
+.bg-zink-700 { background-color: var(--zink-700) }
+.bg-zink-600 { background-color: var(--zink-600) }
+.bg-zink-500 { background-color: var(--zink-500) }
+.bg-zink-400 { background-color: var(--zink-400) }
+.bg-zink-300 { background-color: var(--zink-300) }
+.bg-zink-200 { background-color: var(--zink-200) }
+.bg-zink-100 { background-color: var(--zink-100) }
+.bg-zink-50 { background-color: var(--zink-50) }
+
+
+html { color: var(--zink-800) }
+
+body {
+    font-family: "Geist", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+#note-editor {
+    font-family: "Geist Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.title-page {
+    font-size: 5rem;
+}
+
+/* Layout Containers */
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+/* Responsive Widths */
+@media (min-width: 640px) {
+    .container { max-width: 640px; }
+}
+
+@media (min-width: 1024px) {
+    .container { max-width: 900px; } /* Lebar ideal untuk nulis di desktop */
+}
+
+/* Typography */
+.text-center { text-align: center; }
+
+.alert-box {
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    border: 1px dashed var(--zink-500);
+}
+
+.c-warning {
+    color: #b91c1c;
+}
+
