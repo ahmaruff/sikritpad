@@ -1,17 +1,18 @@
 # SikritPad
 
-SikritPad is a browser-based, client-side encrypted notepad designed with a focus on privacy and modular architecture.
-This project demonstrates advanced web development concepts,
-including the Web Crypto API, asynchronous JavaScript, and a clean separation of concerns.
+SikritPad is a small browser-based encrypted notepad built as a learning project for the Web Crypto API.
+
+All encryption happens in the browser, and notes are stored locally using LocalStorage.
+The goal of this project is to experiment with client-side cryptography and build a modular JavaScript architecture.
 
 ![Demo](demo.gif)
 
 ## Key Features
 
-- Client-Side Encryption: All cryptographic operations occur within the browser context. Plaintext notes and passwords are never transmitted to a server.
-- Zero-Backend Architecture: Utilizes browser LocalStorage for persistence, ensuring user data remains under their direct control.
-- High-Entropy Key Derivation: Employs PBKDF2 with a high iteration count to mitigate brute-force risks.
-- Authenticated Encryption: Uses AES-GCM to ensure both confidentiality and integrity of the stored data.
+- Client-side encryption using the Web Crypto API
+- Notes stored locally in the browser (LocalStorage)
+- Password-based key derivation with PBKDF2
+- AES-GCM authenticated encryption
 
 ## Architecture Overview
 
@@ -19,8 +20,10 @@ The project follows a modular design pattern to ensure maintainability and testa
 The codebase is organized into specialized modules, each with a single responsibility.
 
 ### 1. State Management (`src/app/state.js`)
-The application uses a centralized state object as the single source of truth.
-This prevents state fragmentation across the UI and ensures that sensitive data (like encryption keys) can be systematically purged after use.
+A simple centralized state object used to keep track of the current note,
+derived keys, and application status.
+
+Sensitive data such as encryption keys can be cleared from memory when needed.
 
 ### 2. Cryptographic Layer (`src/crypto/crypto.js`)
 This module abstracts the complexity of the Web Crypto API. It handles:
@@ -54,7 +57,7 @@ Notes are stored as JSON blobs containing:
 - `iv`: A unique array of bytes for that specific save.
 - `data`: The encrypted ciphertext.
 
-This ensures that even if two different notes have the same content, their stored blobs will be entirely different.
+This ensures that identical notes still produce different ciphertext.
 
 ## Tech Stack
 
@@ -62,6 +65,11 @@ This ensures that even if two different notes have the same content, their store
 - Web Crypto API: Native browser support for high-performance cryptography.
 - CSS: Custom utility-based styling for a responsive and lightweight interface.
 - HTML5: Semantic markup for accessibility.
+
+## Running Locally
+
+Clone the repository and open `index.html` in your browser.
+No build step or server is required.
 
 ## License
 
